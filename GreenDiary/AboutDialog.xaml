@@ -1,0 +1,27 @@
+﻿<ContentDialog
+    x:Class="GreenDiary.AboutDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GreenDiary"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="关于我们"
+    PrimaryButtonText="朕已阅"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick" >
+
+    <RelativePanel>
+        <Image RelativePanel.AlignHorizontalCenterWithPanel="True" x:Name="Img_About" Source="/Assets/Logo.png" Width="100" Height="100"/>
+        <TextBlock x:Name="Text_About" RelativePanel.Below="Img_About" Margin="0,10,0,0" TextWrapping="Wrap" Text="有人说，希望每个人死后尸体都能自动变成一本书，书的内容就是死者的生平。这样一来，有人成了名著，有人成了禁 书，有人变成菜谱，有人变成地图，有人变成美图秀秀使用手册，有人是小旅馆登记簿…..整个世界就是一个巨大的图书馆，我们读着别人，做着自己，等着被读。" Foreground="#FF333333"/>
+        <RelativePanel HorizontalAlignment="Center" RelativePanel.Below="Text_About" Margin="0,50,0,0" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
+            <TextBlock x:Name="Text_About_1" FontSize="12" Text="关于开发者：" Foreground="#FF666666" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
+            <Button RelativePanel.RightOf="Text_About_1" FontSize="12" Content="叫我二宁大人！" Tapped="Erning_Click" Background="Transparent" FocusVisualSecondaryBrush="Transparent">
+                <Button.Flyout>
+                    <Flyout>
+                        <TextBlock x:Name="Text_About_Emoji" Text="😝" HorizontalAlignment="Center"/>
+                    </Flyout>
+                </Button.Flyout>
+            </Button>
+        </RelativePanel>
+    </RelativePanel>
+</ContentDialog>

@@ -23,6 +23,8 @@ namespace GreenDiary
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public static ContentDialog CurrentDialog { get; set; } = null;
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -32,16 +34,28 @@ namespace GreenDiary
         {
             string s = ((NavigationViewItem)sender).Content.ToString();
             Trace.WriteLine(s);
-            Navi.IsPaneOpen = false;
-            Navi.Header = s;
         }
 
-        private void Navi_About_Click(object sender, TappedRoutedEventArgs e)
+        private async void Navi_About_Click(object sender, TappedRoutedEventArgs e)
         {
             string s = ((NavigationViewItem)sender).Content.ToString();
             Trace.WriteLine(s);
-            Navi.IsPaneOpen = false;
-            Navi.Header = s;
+
+            if (CurrentDialog != null)
+            {
+                CurrentDialog.Hide();
+            }
+            CurrentDialog = null;
+
+            try
+            {
+                CurrentDialog = new AboutDialog();
+                ContentDialogResult result = await CurrentDialog.ShowAsync();
+            }
+            catch (Exception)
+            {
+                // The dialog didn't open, probably because another dialog is already open.
+            }
         }
 
         private void Navi_SelectChange(NavigationView sender, NavigationViewSelectionChangedEventArgs args)

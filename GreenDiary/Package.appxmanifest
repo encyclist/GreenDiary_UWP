@@ -32,10 +32,10 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="GreenDiary.App">
       <uap:VisualElements
-        DisplayName="GreenDiary"
+        DisplayName="青橙日记"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="GreenDiary"
+        Description="毕业设计之青橙日记"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
