@@ -6,9 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="#FF019683">
 
-    <Grid>
+    <RelativePanel>
+        <Image Source="/Assets/Logo2.png" Width="100" Height="100" Margin="100,100,0,0"/>
 
-    </Grid>
+        <TextBox RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+    </RelativePanel>
 </Page>
