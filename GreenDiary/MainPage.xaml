@@ -9,10 +9,12 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <NavigationView IsBackButtonVisible="Collapsed" PaneTitle="青橙日记" IsBackEnabled="True" Header="我的日记" IsSettingsVisible="False">
+        <NavigationView x:Name="Navi" IsBackButtonVisible="Collapsed" PaneTitle="青橙日记" IsBackEnabled="True" Header="我的日记" IsSettingsVisible="False" SelectionChanged="Navi_SelectChange" PaneDisplayMode="LeftCompact">
+            
             <NavigationView.PaneHeader>
                 <Image Source="/Assets/Logo.png" HorizontalAlignment="Left" Margin="0,5,0,5"/>
             </NavigationView.PaneHeader>
+            
             <NavigationView.MenuItems>
                 <NavigationViewItem Content="我的日记" Icon="Home"/>
                 <NavigationViewItem Content="世界图书馆" Icon="Library"/>
@@ -24,9 +26,15 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
                 <NavigationViewItem Content="个人中心" Icon="Contact"/>
-                <NavigationViewItem Content="设置" Icon="Setting"/>
-                <NavigationViewItem Content="关于我们" Icon="Flag"/>
             </NavigationView.MenuItems>
+            
+            <NavigationView.PaneFooter>
+                <Grid>
+                    <NavigationViewItem Content="设置" Icon="Setting" Tapped="Navi_Setting_Click"/>
+                    <NavigationViewItem Content="关于我们" Icon="Flag" Margin="0,40,0,0" Tapped="Navi_About_Click"/>
+                </Grid>
+            </NavigationView.PaneFooter>
+            
         </NavigationView>
 
     </Grid>

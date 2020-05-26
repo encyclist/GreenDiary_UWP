@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -25,6 +26,29 @@ namespace GreenDiary
         public MainPage()
         {
             this.InitializeComponent();
+        }
+
+        private void Navi_Setting_Click(object sender, TappedRoutedEventArgs e)
+        {
+            string s = ((NavigationViewItem)sender).Content.ToString();
+            Trace.WriteLine(s);
+            Navi.IsPaneOpen = false;
+            Navi.Header = s;
+        }
+
+        private void Navi_About_Click(object sender, TappedRoutedEventArgs e)
+        {
+            string s = ((NavigationViewItem)sender).Content.ToString();
+            Trace.WriteLine(s);
+            Navi.IsPaneOpen = false;
+            Navi.Header = s;
+        }
+
+        private void Navi_SelectChange(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            var s = ((NavigationViewItem)sender.SelectedItem).Content.ToString();
+            Trace.WriteLine(s);
+            Navi.Header = s;
         }
     }
 }
