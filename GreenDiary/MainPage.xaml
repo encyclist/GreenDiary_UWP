@@ -9,7 +9,25 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <NavigationView Content="NavigationView"/>
+        <NavigationView IsBackButtonVisible="Collapsed" PaneTitle="青橙日记" IsBackEnabled="True" Header="我的日记" IsSettingsVisible="False">
+            <NavigationView.PaneHeader>
+                <Image Source="/Assets/Logo.png" HorizontalAlignment="Left" Margin="0,5,0,5"/>
+            </NavigationView.PaneHeader>
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="我的日记" Icon="Home"/>
+                <NavigationViewItem Content="世界图书馆" Icon="Library"/>
+                <NavigationViewItem Content="相册" Icon="BrowsePhotos"/>
+                <NavigationViewItemSeparator/>
+                <NavigationViewItem Content="通知">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#59581;"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="个人中心" Icon="Contact"/>
+                <NavigationViewItem Content="设置" Icon="Setting"/>
+                <NavigationViewItem Content="关于我们" Icon="Flag"/>
+            </NavigationView.MenuItems>
+        </NavigationView>
 
     </Grid>
 </Page>
