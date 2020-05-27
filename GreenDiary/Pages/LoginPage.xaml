@@ -6,11 +6,29 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="#FF019683">
+    Background="#FF0DC5BD">
 
     <RelativePanel>
-        <Image Source="/Assets/Logo2.png" Width="100" Height="100" Margin="100,100,0,0"/>
-
-        <TextBox RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+        <Image Source="/Assets/Theme_Background.png" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Stretch="Fill" />
+        <Image x:Name="Img_Login_Logo" Source="/Assets/Logo2.png" Width="100" Height="100" Margin="60,60,0,0" />
+        <TextBlock Margin="10,60,0,0" VerticalAlignment="Center" Text="青橙日记" Foreground="White" FontSize="56" RelativePanel.RightOf="Img_Login_Logo" RelativePanel.AlignVerticalCenterWith="Img_Login_Logo"/>
+        <Grid Margin="0,60,0,0" RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="Img_Login_Logo" Width="300">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Border Grid.Row="0" BorderBrush="White" BorderThickness="0" CornerRadius="5">
+                <TextBox x:Name="Text_Login_Phone" Background="White" BorderBrush="White" PlaceholderForeground="#FF999999" PlaceholderText="请输入手机号" BorderThickness="0,0,0,0" Padding="10,8,10,8" InputScope="TelephoneNumber" />
+            </Border>
+            <Border Grid.Row="2" BorderBrush="White" BorderThickness="0" CornerRadius="5">
+                <TextBox x:Name="Text_Login_Code" Background="White" BorderBrush="White" PlaceholderForeground="#FF999999" PlaceholderText="请输入验证码" BorderThickness="0,0,0,0" Padding="10,8,10,8" InputScope="Number" />
+            </Border>
+            <Border Grid.Row="4" BorderBrush="White" BorderThickness="1" CornerRadius="5">
+                <TextBlock TextAlignment="Center" Text="获取验证码" Foreground="White" Padding="10,8,10,8" Tapped="GetCode_Click"/>
+            </Border>
+        </Grid>
     </RelativePanel>
 </Page>

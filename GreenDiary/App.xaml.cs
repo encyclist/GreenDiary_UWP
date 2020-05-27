@@ -1,4 +1,7 @@
 ﻿using GreenDiary.Pages;
+using GreenDiary.Repository;
+using GreenDiary.Repository.Rests;
+using GreenDiary.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,6 +26,12 @@ namespace GreenDiary
     /// </summary>
     sealed partial class App : Application
     {
+        public static string sign = "GuoNing5420";
+        public static LoginViewModel LoginViewModel { get; } = new LoginViewModel();
+        ///用于与后端服务或数据库交互的管道。
+        public static IContosoRepository Repository { get; private set; }
+
+
         /// <summary>
         /// 初始化单一实例应用程序对象。这是执行的创作代码的第一行，
         /// 已执行，逻辑上等同于 main() 或 WinMain()。
@@ -72,6 +81,10 @@ namespace GreenDiary
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
             }
+
+            // 自己的初始化
+            //Repository = new RestContosoRepository("https://www.erning.cn:10206/");
+            Repository = new RestContosoRepository("http://127.0.0.1:10206/");
         }
 
         /// <summary>
