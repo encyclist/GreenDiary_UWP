@@ -9,5 +9,6 @@ namespace GreenDiary.Repository
     public interface IContosoRepository
     {
         ILoginRepository Logins { get; }
+        IMainRepository Mains { get; }
     }
 }

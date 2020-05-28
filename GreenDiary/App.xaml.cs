@@ -31,6 +31,7 @@ namespace GreenDiary
         private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public static string sign = "GuoNing5420";
         public static LoginViewModel LoginViewModel { get; } = new LoginViewModel();
+        public static MainViewModel MainViewModel { get; } = new MainViewModel();
         ///用于与后端服务或数据库交互的管道。
         public static IContosoRepository Repository { get; private set; }
 
@@ -52,6 +53,10 @@ namespace GreenDiary
         /// <param name="e">有关启动请求和过程的详细信息。</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            // 初始化网络请求接口地址
+            Repository = new RestContosoRepository("https://www.erning.cn:10206/");
+            //Repository = new RestContosoRepository("http://127.0.0.1:10206/");
+
             Frame rootFrame = Window.Current.Content as Frame;
 
             // 不要在窗口已包含内容时重复应用程序初始化，
@@ -91,10 +96,6 @@ namespace GreenDiary
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
             }
-
-            // 自己的初始化
-            Repository = new RestContosoRepository("https://www.erning.cn:10206/");
-            //Repository = new RestContosoRepository("http://127.0.0.1:10206/");
         }
 
         /// <summary>

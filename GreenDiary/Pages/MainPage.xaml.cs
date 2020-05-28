@@ -1,4 +1,5 @@
 ﻿using GreenDiary.Dialogs;
+using GreenDiary.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -24,6 +26,8 @@ namespace GreenDiary.Pages
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+        private MainViewModel ViewModel => App.MainViewModel;
         public static ContentDialog CurrentDialog { get; set; } = null;
 
         public MainPage()
@@ -32,6 +36,8 @@ namespace GreenDiary.Pages
             // 默认第一个被选中的效果
             Navi.SelectedItem = Navi_Item_Diary;
             frame.Navigate(typeof(DiaryPage));
+
+            Mark();
         }
 
         private async void Navi_About_Click(object sender, TappedRoutedEventArgs e)
@@ -79,6 +85,16 @@ namespace GreenDiary.Pages
             else if (Navi.SelectedItem == Navi_Item_My)
             {
                 frame.Navigate(typeof(MyPage));
+            }
+        }
+
+        // 每日签到
+        private async void Mark()
+        {
+            var data = await ViewModel.Mark();
+            if (data.Successfully())
+            {
+                new NotifyPopup("签到成功，积分+1").Show();
             }
         }
     }

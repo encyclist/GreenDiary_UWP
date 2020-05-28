@@ -15,5 +15,6 @@ namespace GreenDiary.Repository.Rests
             _url = url;
         }
         public ILoginRepository Logins => new RestLoginRepository(_url);
+        public IMainRepository Mains => new RestMainRepository(_url);
     }
 }

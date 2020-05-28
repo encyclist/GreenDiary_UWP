@@ -13,7 +13,12 @@ namespace GreenDiary.ViewModels
         {
             try
             {
-                return await App.Repository.Logins.GetCode(phone);
+                var data = await App.Repository.Logins.GetCode(phone);
+                if (data == null)
+                {
+                    return new Models.BaseResultModel(-1, "请求被拒绝，可能是恶意攻击");
+                }
+                return data;
             }
             catch (Exception e)
             {
@@ -26,7 +31,12 @@ namespace GreenDiary.ViewModels
         {
             try
             {
-                return await App.Repository.Logins.Login(phone,code);
+                var data = await App.Repository.Logins.Login(phone, code);
+                if (data == null)
+                {
+                    return new Models.BaseResultModel(-1, "请求被拒绝，可能是恶意攻击");
+                }
+                return data;
             }
             catch (Exception e)
             {

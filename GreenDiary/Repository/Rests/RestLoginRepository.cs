@@ -18,27 +18,20 @@ namespace GreenDiary.Repository.Rests
 
         public async Task<BaseResultModel> GetCode(string phone)
         {
-            string time = TimeHelper.GetTimestamp().ToString();
-
             SortedList<string, string> data = new SortedList<string, string>();
             data.Add("phone", phone);
             data.Add("action", "login");
-            data.Add("sign", SignHelper.Sign(data, time));
-            data.Add("timestamp", time);
-            return await _http.PostAsync<SortedList<string, string>, BaseResultModel>("base/sms", data);
+            return await _http.PostAsync<SortedList<string, string>, BaseResultModel>("base/sms", SignHelper.GenerateSign(data));
         }
 
         public async Task<BaseResultModel> Login(string phone,string code)
         {
-            string time = TimeHelper.GetTimestamp().ToString();
-
             SortedList<string, string> data = new SortedList<string, string>();
             data.Add("id", phone);
             data.Add("code", code);
-            data.Add("nickname", phone.Substring(phone.Length-1));
-            data.Add("sign", SignHelper.Sign(data, time));
-            data.Add("timestamp", time);
-            return await _http.PostAsync<SortedList<string, string>, BaseResultModel>("user/login", data);
+            data.Add("nickname", phone.Substring(phone.Length-4));
+            
+            return await _http.PostAsync<SortedList<string, string>, BaseResultModel>("user/login", SignHelper.GenerateSign(data));
         }
     }
 }
