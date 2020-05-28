@@ -10,37 +10,48 @@
 
     <Grid>
         <NavigationView
+            OpenPaneLength="200"
             x:Name="Navi" 
             IsBackButtonVisible="Collapsed" 
             PaneTitle="青橙日记" 
             Header="我的日记" 
-            IsSettingsVisible="False" 
-            SelectionChanged="Navi_SelectChange">
+            ItemInvoked="NavigationView_ItemInvoked" >
             
             <NavigationView.PaneHeader>
                 <Image Source="/Assets/Logo.png" HorizontalAlignment="Left" Margin="0,5,0,5"/>
             </NavigationView.PaneHeader>
             
             <NavigationView.MenuItems>
-                <NavigationViewItem x:Name="Navi_Item_Diary" Content="我的日记" Icon="Home" IsSelected="True"/>
-                <NavigationViewItem Content="世界图书馆" Icon="Library"/>
-                <NavigationViewItem Content="相册" Icon="BrowsePhotos"/>
+                <NavigationViewItem x:Name="Navi_Item_Diary" Content="我的日记" Icon="Home"/>
+                <NavigationViewItem x:Name="Navi_Item_Library" Content="探索发现" Icon="Library"/>
+                <NavigationViewItem x:Name="Navi_Item_Album" Content="相册" Icon="BrowsePhotos"/>
                 <NavigationViewItemSeparator/>
-                <NavigationViewItem Content="通知">
+                <NavigationViewItem x:Name="Navi_Item_Notify" Content="通知">
                     <NavigationViewItem.Icon>
                         <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#59581;"/>
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
-                <NavigationViewItem Content="个人中心" Icon="Contact"/>
+                <NavigationViewItem x:Name="Navi_Item_My" Content="个人中心" Icon="Contact"/>
             </NavigationView.MenuItems>
-            
+
             <NavigationView.PaneFooter>
-                <Grid>
-                    <NavigationViewItem Content="设置" Icon="Setting" Tapped="Navi_Setting_Click"/>
-                    <NavigationViewItem Content="关于我们" Icon="Flag" Margin="0,40,0,0" Tapped="Navi_About_Click"/>
-                </Grid>
+                <NavigationViewItem Content="关于我们" Icon="Flag" Tapped="Navi_About_Click"/>
             </NavigationView.PaneFooter>
-            
+
+            <Frame
+                x:Name="frame"
+                Margin="20,0,20,0" >
+                <Frame.ContentTransitions>
+                    <TransitionCollection>
+                        <NavigationThemeTransition>
+                            <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                                <EntranceNavigationTransitionInfo />
+                            </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                        </NavigationThemeTransition>
+                    </TransitionCollection>
+                </Frame.ContentTransitions>
+            </Frame>
+
         </NavigationView>
 
     </Grid>

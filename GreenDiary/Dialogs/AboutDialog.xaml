@@ -16,11 +16,11 @@
         <RelativePanel HorizontalAlignment="Center" RelativePanel.Below="Text_About" Margin="0,50,0,0" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True">
             <TextBlock x:Name="Text_About_1" FontSize="12" Text="关于开发者：" Foreground="#FF666666" RelativePanel.AlignTopWithPanel="True" RelativePanel.AlignBottomWithPanel="True" VerticalAlignment="Center" HorizontalAlignment="Stretch"/>
             <Button RelativePanel.RightOf="Text_About_1" FontSize="12" Content="叫我二宁大人！" Tapped="Erning_Click" Background="Transparent" FocusVisualSecondaryBrush="Transparent">
-                <Button.Flyout>
+                <!--<Button.Flyout>
                     <Flyout>
                         <TextBlock x:Name="Text_About_Emoji" Text="😝" HorizontalAlignment="Center"/>
                     </Flyout>
-                </Button.Flyout>
+                </Button.Flyout>-->
             </Button>
         </RelativePanel>
     </RelativePanel>

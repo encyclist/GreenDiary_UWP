@@ -25,8 +25,6 @@ namespace GreenDiary.Dialogs
         public AboutDialog()
         {
             this.InitializeComponent();
-
-            Text_About_Emoji.Text = emojis[random.Next(0, emojis.Length - 1)];
         }
 
         private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
@@ -35,7 +33,7 @@ namespace GreenDiary.Dialogs
 
         private void Erning_Click(object sender, TappedRoutedEventArgs e)
         {
-            Text_About_Emoji.Text = emojis[random.Next(0, emojis.Length)];
+            new NotifyPopup(emojis[random.Next(0, emojis.Length)]).Show();
         }
     }
 }

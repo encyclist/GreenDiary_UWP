@@ -29,12 +29,9 @@ namespace GreenDiary.Pages
         public MainPage()
         {
             this.InitializeComponent();
-        }
-
-        private void Navi_Setting_Click(object sender, TappedRoutedEventArgs e)
-        {
-            string s = ((NavigationViewItem)sender).Content.ToString();
-            Trace.WriteLine(s);
+            // 默认第一个被选中的效果
+            Navi.SelectedItem = Navi_Item_Diary;
+            frame.Navigate(typeof(DiaryPage));
         }
 
         private async void Navi_About_Click(object sender, TappedRoutedEventArgs e)
@@ -59,11 +56,39 @@ namespace GreenDiary.Pages
             }
         }
 
-        private void Navi_SelectChange(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        /// <summary>
+        /// 导航到所选项目对应的页面。
+        /// </summary>
+        private void NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             var s = ((NavigationViewItem)sender.SelectedItem).Content.ToString();
             Trace.WriteLine(s);
             Navi.Header = s;
+
+            if (args.IsSettingsInvoked)
+            {
+                frame.Navigate(typeof(SettingPage));
+            }
+            else if (Navi.SelectedItem == Navi_Item_Diary)
+            {
+                frame.Navigate(typeof(DiaryPage));
+            }
+            else if (Navi.SelectedItem == Navi_Item_Library)
+            {
+                frame.Navigate(typeof(LibraryPage));
+            }
+            else if (Navi.SelectedItem == Navi_Item_Album)
+            {
+                frame.Navigate(typeof(AlbumPage));
+            }
+            else if (Navi.SelectedItem == Navi_Item_Notify)
+            {
+                frame.Navigate(typeof(NotifyPage));
+            }
+            else if (Navi.SelectedItem == Navi_Item_My)
+            {
+                frame.Navigate(typeof(MyPage));
+            }
         }
     }
 }
