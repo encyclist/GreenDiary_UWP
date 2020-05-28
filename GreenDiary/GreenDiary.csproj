@@ -122,6 +122,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Dialogs\NotifyPopup.xaml.cs">
+      <DependentUpon>NotifyPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\Md5helper.cs" />
     <Compile Include="Helpers\NumberHelper.cs" />
     <Compile Include="Helpers\SignHelper.cs" />
@@ -166,6 +169,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Dialogs\AboutDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\NotifyPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

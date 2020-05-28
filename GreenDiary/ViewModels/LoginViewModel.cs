@@ -9,9 +9,17 @@ namespace GreenDiary.ViewModels
 {
     public class LoginViewModel : BindableBase
     {
-        internal async void GetCode(string phone)
+        internal async Task<Models.BaseResultModel> GetCode(string phone)
         {
-            var data = await App.Repository.Logins.GetCode(phone);
+            try
+            {
+                return await App.Repository.Logins.GetCode(phone);
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e.ToString());
+                return new Models.BaseResultModel(-1,"网络错误");
+            }
         }
     }
 }

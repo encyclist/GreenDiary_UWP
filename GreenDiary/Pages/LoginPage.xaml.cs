@@ -1,4 +1,5 @@
-﻿using GreenDiary.Helpers;
+﻿using GreenDiary.Dialogs;
+using GreenDiary.Helpers;
 using GreenDiary.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -33,21 +34,43 @@ namespace GreenDiary.Pages
             this.InitializeComponent();
         }
 
-        private void GetCode_Click(object sender, TappedRoutedEventArgs e)
+        private async void GetCode_Click(object sender, TappedRoutedEventArgs e)
         {
             string phone = Text_Login_Phone.Text;
-            string code = Text_Login_Code.Text;
-            //if (phone.Length != 11 || !phone.StartsWith("1") || !NumberHelper.IsNumeric(phone))
-            //{
-            //    return;
-            //}
-            //if (String.IsNullOrEmpty(phone))
-            //{
-            //    return;
-            //}
+            if (phone.Length != 11 || !phone.StartsWith("1") || !NumberHelper.IsNumeric(phone))
+            {
+                return;
+            }
 
+            Progress_GetCode.IsActive = true;
+            ((TextBlock)sender).IsTapEnabled = false;
             // 联网
-            ViewModel.GetCode(phone);
+            var data = await ViewModel.GetCode(phone);
+            if (data.Successfully())
+            {
+                ((TextBlock)sender).Text = "验证码已发送";
+                Progress_GetCode.IsActive = false;
+            }
+            else
+            {
+                new NotifyPopup(data.message).Show();
+                Progress_GetCode.IsActive = false;
+                ((TextBlock)sender).IsTapEnabled = true;
+            }
+        }
+
+        private void Text_Code_Change(object sender, TextChangedEventArgs e)
+        {
+            string code = Text_Login_Code.Text;
+            string phone = Text_Login_Phone.Text;
+            if (phone.Length != 11 || !phone.StartsWith("1") || !NumberHelper.IsNumeric(phone))
+            {
+                return;
+            }
+            if (code.Length == 6)
+            {
+                // 输入已完成
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
@@ -40,7 +41,7 @@ namespace GreenDiary.Repository.Rests
             Trace.WriteLine("请求参数：" + JsonConvert.SerializeObject(body));
             using (var client = BaseClient())
             {
-                var response = await client.PostAsync(controller, new JsonStringContent(body));
+                var response = await client.PostAsync(controller, new UrlencodedContent(body));
                 string json = await response.Content.ReadAsStringAsync();
                 Trace.WriteLine(json);
                 TResult obj = JsonConvert.DeserializeObject<TResult>(json);
@@ -74,6 +75,15 @@ namespace GreenDiary.Repository.Rests
             /// Creates <see cref="StringContent"/> formatted as UTF8 application/json.
             /// </summary>
             public JsonStringContent(object obj) : base(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json")
+            { }
+        }
+
+        private class UrlencodedContent : FormUrlEncodedContent
+        {
+            /// <summary>
+            /// Creates <see cref="StringContent"/> formatted as UTF8 application/json.
+            /// </summary>
+            public UrlencodedContent(object obj) : base((IEnumerable<KeyValuePair<string, string>>)obj)
             { }
         }
     }

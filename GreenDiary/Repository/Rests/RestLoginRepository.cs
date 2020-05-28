@@ -25,7 +25,7 @@ namespace GreenDiary.Repository.Rests
             data.Add("action", "login");
             data.Add("sign", SignHelper.Sign(data, time));
             data.Add("timestamp", time);
-            return await _http.PostAsync<SortedList<string, string>, BaseResultModel>("GetCode", data);
+            return await _http.PostAsync<SortedList<string, string>, BaseResultModel>("base/sms", data);
         }
     }
 }

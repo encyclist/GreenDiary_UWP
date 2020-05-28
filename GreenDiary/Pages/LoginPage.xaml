@@ -24,11 +24,12 @@
                 <TextBox x:Name="Text_Login_Phone" Background="White" BorderBrush="White" PlaceholderForeground="#FF999999" PlaceholderText="请输入手机号" BorderThickness="0,0,0,0" Padding="10,8,10,8" InputScope="TelephoneNumber" />
             </Border>
             <Border Grid.Row="2" BorderBrush="White" BorderThickness="0" CornerRadius="5">
-                <TextBox x:Name="Text_Login_Code" Background="White" BorderBrush="White" PlaceholderForeground="#FF999999" PlaceholderText="请输入验证码" BorderThickness="0,0,0,0" Padding="10,8,10,8" InputScope="Number" />
+                <TextBox x:Name="Text_Login_Code" Background="White" BorderBrush="White" PlaceholderForeground="#FF999999" PlaceholderText="请输入验证码" BorderThickness="0,0,0,0" Padding="10,8,10,8" InputScope="Number" TextChanged="Text_Code_Change" />
             </Border>
             <Border Grid.Row="4" BorderBrush="White" BorderThickness="1" CornerRadius="5">
                 <TextBlock TextAlignment="Center" Text="获取验证码" Foreground="White" Padding="10,8,10,8" Tapped="GetCode_Click"/>
             </Border>
+            <ProgressRing x:Name="Progress_GetCode" Grid.Row="4" Height="30" Width="30" Foreground="White"/>
         </Grid>
     </RelativePanel>
 </Page>

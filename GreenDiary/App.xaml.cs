@@ -83,8 +83,8 @@ namespace GreenDiary
             }
 
             // 自己的初始化
-            //Repository = new RestContosoRepository("https://www.erning.cn:10206/");
-            Repository = new RestContosoRepository("http://127.0.0.1:10206/");
+            Repository = new RestContosoRepository("https://www.erning.cn:10206/");
+            //Repository = new RestContosoRepository("http://127.0.0.1:10206/");
         }
 
         /// <summary>
