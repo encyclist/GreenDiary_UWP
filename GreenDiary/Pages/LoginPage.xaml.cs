@@ -8,8 +8,10 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text.RegularExpressions;
+using Windows.Devices.Sensors;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,7 +29,9 @@ namespace GreenDiary.Pages
     /// </summary>
     public sealed partial class LoginPage : Page
     {
-        public LoginViewModel ViewModel => App.LoginViewModel;
+        //获取当前应用的本地设置容器
+        private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+        private LoginViewModel ViewModel => App.LoginViewModel;
 
         public LoginPage()
         {
@@ -59,7 +63,7 @@ namespace GreenDiary.Pages
             }
         }
 
-        private void Text_Code_Change(object sender, TextChangedEventArgs e)
+        private async void Text_Code_Change(object sender, TextChangedEventArgs e)
         {
             string code = Text_Login_Code.Text;
             string phone = Text_Login_Phone.Text;
@@ -67,9 +71,23 @@ namespace GreenDiary.Pages
             {
                 return;
             }
-            if (code.Length == 6)
+            if (code.Length != 6)
             {
-                // 输入已完成
+                return;
+            }
+
+            var data = await ViewModel.Login(phone,code);
+            if (data.Successfully())
+            {
+                var id = data.GetObject().Value<string>("id");
+                var token = data.GetObject().Value<string>("token");
+                localSettings.Values["id"] = id;
+                localSettings.Values["token"] = token;
+                this.Frame.Navigate(typeof(MainPage));
+            }
+            else
+            {
+                new NotifyPopup(data.message).Show();
             }
         }
     }

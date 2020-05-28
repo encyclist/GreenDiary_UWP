@@ -21,5 +21,18 @@ namespace GreenDiary.ViewModels
                 return new Models.BaseResultModel(-1,"网络错误");
             }
         }
+
+        internal async Task<Models.BaseResultModel> Login(string phone, string code)
+        {
+            try
+            {
+                return await App.Repository.Logins.Login(phone,code);
+            }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e.ToString());
+                return new Models.BaseResultModel(-1, "网络错误");
+            }
+        }
     }
 }

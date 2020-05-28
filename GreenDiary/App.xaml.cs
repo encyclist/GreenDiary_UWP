@@ -11,6 +11,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -26,6 +27,8 @@ namespace GreenDiary
     /// </summary>
     sealed partial class App : Application
     {
+        //获取当前应用的本地设置容器
+        private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public static string sign = "GuoNing5420";
         public static LoginViewModel LoginViewModel { get; } = new LoginViewModel();
         ///用于与后端服务或数据库交互的管道。
@@ -76,7 +79,14 @@ namespace GreenDiary
                     // 当导航堆栈尚未还原时，导航到第一页，
                     // 并通过将所需信息作为导航参数传入来配置
                     // 参数
-                    rootFrame.Navigate(typeof(LoginPage), e.Arguments);
+                    if (localSettings.Values.ContainsKey("token"))
+                    {
+                        rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    }
+                    else 
+                    {
+                        rootFrame.Navigate(typeof(LoginPage), e.Arguments);
+                    }
                 }
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
