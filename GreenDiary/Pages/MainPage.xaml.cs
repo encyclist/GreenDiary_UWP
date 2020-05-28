@@ -43,17 +43,8 @@ namespace GreenDiary.Pages
             {
                 CurrentDialog.Hide();
             }
-            CurrentDialog = null;
-
-            try
-            {
-                CurrentDialog = new AboutDialog();
-                ContentDialogResult result = await CurrentDialog.ShowAsync();
-            }
-            catch (Exception)
-            {
-                // The dialog didn't open, probably because another dialog is already open.
-            }
+            CurrentDialog = new AboutDialog();
+            await CurrentDialog.ShowAsync();
         }
 
         /// <summary>
