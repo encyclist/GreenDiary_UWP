@@ -30,7 +30,7 @@ namespace GreenDiary.Pages
     public sealed partial class LoginPage : Page
     {
         //获取当前应用的本地设置容器
-        private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+        private readonly ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         private LoginViewModel ViewModel => App.LoginViewModel;
 
         public LoginPage()
