@@ -74,5 +74,13 @@ namespace GreenDiary.Pages
             width.Width = (int)(200 + remaininge/colunm - 2);
         }
 
+        private void scrollRoot_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e) 
+        {
+            if (scrollRoot.VerticalOffset <= scrollRoot.ScrollableHeight - 500) 
+                return;
+
+            GetData();
+        }
+
     }
 }

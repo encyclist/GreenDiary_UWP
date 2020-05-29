@@ -10,15 +10,21 @@
 
     <Grid>
         <Border x:Name="width" Width="200" Height="0"/>
-        <GridView x:Name="GridView_Library" ItemsSource="{Binding}" ScrollViewer.VerticalScrollBarVisibility="Hidden">
-            <GridView.ItemTemplate>
-                <DataTemplate x:DataType="local1:Diary">
-                    <Grid Width="{Binding ElementName=width,Path=Width}" Margin="5">
-                        <Image Width="{Binding ElementName=width,Path=Width}" Height="{Binding ElementName=width,Path=Width}" Source="{Binding RandomImage}" Stretch="UniformToFill"/>
-                        <TextBlock Text="{Binding content}"/>
-                    </Grid>
-                </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
+        <ScrollViewer x:Name="scrollRoot" VerticalScrollBarVisibility="Hidden" ViewChanged="scrollRoot_ViewChanged">
+            <GridView x:Name="GridView_Library" ItemsSource="{Binding}" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="local1:Diary">
+                        <Grid Width="{Binding ElementName=width,Path=Width}" Margin="5" Background="#eeeeee" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Width="{Binding ElementName=width,Path=Width}" Height="{Binding ElementName=width,Path=Width}" Source="{Binding RandomImage}" Stretch="UniformToFill"/>
+                            <TextBlock Grid.Row="1" Text="{Binding content}" Margin="5" TextWrapping="Wrap"/>
+                        </Grid>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
+        </ScrollViewer>
     </Grid>
 </Page>
