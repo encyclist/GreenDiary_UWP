@@ -9,6 +9,28 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock Text="日记"/>
+        <GridView SelectionMode="Single" HorizontalAlignment="Center">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Border Background="LightGray" Height="200" MinWidth="200">
+                            <TextBlock Text="{Binding}" FontSize="48" Foreground="Green"/>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+            <GridView.Items>
+                <x:String>asd</x:String>
+                <x:String>asd</x:String>
+                <x:String>asd</x:String>
+                <x:String>asd</x:String>
+                <x:String>asd</x:String>
+                <x:String>asd</x:String>
+                <x:String>asd</x:String>
+                <x:String>asd</x:String>
+                <x:String>asd</x:String>
+            </GridView.Items>
+        </GridView>
+
     </Grid>
 </Page>

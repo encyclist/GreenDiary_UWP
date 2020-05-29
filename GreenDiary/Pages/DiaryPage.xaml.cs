@@ -1,5 +1,9 @@
-﻿using System;
+﻿using GreenDiary.Dialogs;
+using GreenDiary.Models;
+using GreenDiary.ViewModels;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -22,9 +26,48 @@ namespace GreenDiary.Pages
     /// </summary>
     public sealed partial class DiaryPage : Page
     {
+        private MainViewModel ViewModel => App.MainViewModel;
+
+        private readonly int limit = 20;
+        private int page = 0;
+        private bool loading = false;
+
         public DiaryPage()
         {
             this.InitializeComponent();
+            GetData();
+        }
+
+        private async void GetData()
+        {
+            if (loading)
+            {
+                return;
+            }
+            loading = true;
+            page++;
+
+            var data = await ViewModel.GetDiaryList(page,limit);
+            if (data.Successfully())
+            {
+                loading = false;
+                var diarys = data.GetTArray<Diary>();
+                // TODO
+            }
+            else
+            {
+                new NotifyPopup(data.message).Show();
+                loading = false;
+            }
+        }
+        private void GetNewData()
+        {
+            if (loading)
+            {
+                return;
+            }
+            page = 0;
+            GetData();
         }
     }
 }

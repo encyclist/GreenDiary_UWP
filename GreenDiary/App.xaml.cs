@@ -27,8 +27,9 @@ namespace GreenDiary
     /// </summary>
     sealed partial class App : Application
     {
+        public static readonly string URL = "https://www.erning.cn:10206/";
         //获取当前应用的本地设置容器
-        private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+        private readonly ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         public static string sign = "GuoNing5420";
         public static LoginViewModel LoginViewModel { get; } = new LoginViewModel();
         public static MainViewModel MainViewModel { get; } = new MainViewModel();
@@ -54,8 +55,7 @@ namespace GreenDiary
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
             // 初始化网络请求接口地址
-            Repository = new RestContosoRepository("https://www.erning.cn:10206/");
-            //Repository = new RestContosoRepository("http://127.0.0.1:10206/");
+            Repository = new RestContosoRepository(URL);
 
             Frame rootFrame = Window.Current.Content as Frame;
 

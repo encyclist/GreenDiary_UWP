@@ -130,6 +130,7 @@
     <Compile Include="Helpers\SignHelper.cs" />
     <Compile Include="Helpers\TimeHelper.cs" />
     <Compile Include="Models\BaseResultModel.cs" />
+    <Compile Include="Models\Diary.cs" />
     <Compile Include="Pages\AlbumPage.xaml.cs">
       <DependentUpon>AlbumPage.xaml</DependentUpon>
     </Compile>

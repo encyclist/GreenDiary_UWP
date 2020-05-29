@@ -26,7 +26,6 @@ namespace GreenDiary.Pages
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        private ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
         private MainViewModel ViewModel => App.MainViewModel;
         public static ContentDialog CurrentDialog { get; set; } = null;
 
@@ -34,8 +33,8 @@ namespace GreenDiary.Pages
         {
             this.InitializeComponent();
             // 默认第一个被选中的效果
-            Navi.SelectedItem = Navi_Item_Diary;
-            frame.Navigate(typeof(DiaryPage));
+            Navi.SelectedItem = Navi_Item_Library;
+            frame.Navigate(typeof(LibraryPage));
 
             Mark();
         }

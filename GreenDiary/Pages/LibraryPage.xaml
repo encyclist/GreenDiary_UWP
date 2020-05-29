@@ -4,11 +4,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:GreenDiary.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local1="using:GreenDiary.Models"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" SizeChanged="PageSizeChanged">
 
     <Grid>
-        <TextBlock Text="发现"/>
+        <Border x:Name="width" Width="200" Height="0"/>
+        <GridView x:Name="GridView_Library" ItemsSource="{Binding}" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="local1:Diary">
+                    <Grid Width="{Binding ElementName=width,Path=Width}" Margin="5">
+                        <Image Width="{Binding ElementName=width,Path=Width}" Height="{Binding ElementName=width,Path=Width}" Source="{Binding RandomImage}" Stretch="UniformToFill"/>
+                        <TextBlock Text="{Binding content}"/>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
     </Grid>
 </Page>

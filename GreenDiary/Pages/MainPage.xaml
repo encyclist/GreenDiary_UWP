@@ -40,7 +40,7 @@
 
             <Frame
                 x:Name="frame"
-                Margin="20,0,20,0" >
+                Margin="10,0,10,0" >
                 <Frame.ContentTransitions>
                     <TransitionCollection>
                         <NavigationThemeTransition>

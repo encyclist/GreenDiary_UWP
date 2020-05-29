@@ -22,5 +22,20 @@ namespace GreenDiary.Repository.Rests
         {
             return await _http.PostAsync<SortedList<string, string>, BaseResultModel>("user/mark", SignHelper.GenerateSign());
         }
+
+        public async Task<BaseResultModel> GetDiaryList(int page, int limit)
+        {
+            SortedList<string, string> data = new SortedList<string, string>();
+            data.Add("page", page.ToString());
+            data.Add("limit", limit.ToString());
+            return await _http.PostAsync<SortedList<string, string>, BaseResultModel>("diary/list", SignHelper.GenerateSign(data));
+        }
+
+        public async Task<BaseResultModel> GetLibraryList(int limit)
+        {
+            SortedList<string, string> data = new SortedList<string, string>();
+            data.Add("limit", limit.ToString());
+            return await _http.PostAsync<SortedList<string, string>, BaseResultModel>("diary/getLibraryList", SignHelper.GenerateSign(data));
+        }
     }
 }
