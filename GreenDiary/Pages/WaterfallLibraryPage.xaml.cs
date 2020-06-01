@@ -1,6 +1,7 @@
 ﻿using GreenDiary.Dialogs;
 using GreenDiary.Models;
 using GreenDiary.ViewModels;
+using GreenDiary.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -26,7 +27,7 @@ namespace GreenDiary.Pages
     /// <summary>
     /// 可用于自身或导航至 Frame 内部的空白页。
     /// </summary>
-    public sealed partial class LibraryPage : Page
+    public sealed partial class WaterfallLibraryPage : Page
     {
         private MainViewModel ViewModel => App.MainViewModel;
 
@@ -34,11 +35,9 @@ namespace GreenDiary.Pages
 
         private readonly int limit = 30;
 
-        public LibraryPage()
+        public WaterfallLibraryPage()
         {
             this.InitializeComponent();
-            // 缓存页面，在页面关闭之前保留缓存，比如后退到这个页面或被重新打开
-            this.NavigationCacheMode = NavigationCacheMode.Enabled;
             this.Loaded += LibraryPage_Loaded;
         }
 
@@ -50,6 +49,7 @@ namespace GreenDiary.Pages
                 return Task.Run(() => Tuple.Create(data.Result, true));
             });
             GridView_Library.ItemsSource = diarys;
+            GetData2();
         }
 
         private async Task<List<Diary>> GetData()
@@ -67,13 +67,34 @@ namespace GreenDiary.Pages
             return new List<Diary>(0);
         }
 
+        private async void GetData2()
+        {
+            var data = await ViewModel.GetLibraryList(limit);
+            if (data.Successfully())
+            {
+                foreach (Diary diary in data.GetTArray<Diary>())
+                {
+                    diarys.Add(diary);
+                }
+            }
+            else
+            {
+                new NotifyPopup(data.message).Show();
+            }
+        }
+
         private void PageSizeChanged(object sender, SizeChangedEventArgs e)
         {
             int colunm = (int)(e.NewSize.Width / (200 + 10 + 4));
-            var use = (colunm - 1) * 4 + colunm * (200 + 10);
-            var remaininge = e.NewSize.Width - use;
-            width.Width = (int)(200 + remaininge/colunm - 2);
+            (GridView_Library.ItemsPanelRoot as WaterfallPanel).NumberOfColumnsOrRows = colunm;
         }
 
+        private void scrollRoot_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            if (scrollRoot.VerticalOffset <= scrollRoot.ScrollableHeight - 500)
+                return;
+
+            GetData2();
+        }
     }
 }

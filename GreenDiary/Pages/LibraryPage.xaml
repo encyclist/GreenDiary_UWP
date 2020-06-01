@@ -19,7 +19,7 @@
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
                         <Image Grid.Row="0" Width="{Binding ElementName=width,Path=Width}" Height="{Binding ElementName=width,Path=Width}" Source="{Binding RandomImage}" Stretch="UniformToFill"/>
-                        <TextBlock Grid.Row="1" Text="{Binding content}" Margin="5" TextWrapping="Wrap"/>
+                        <TextBlock Grid.Row="1" Text="{Binding content}" Margin="5"/>
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>

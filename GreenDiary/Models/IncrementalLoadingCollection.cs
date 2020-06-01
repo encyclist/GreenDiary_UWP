@@ -20,14 +20,13 @@ namespace GreenDiary.Pages
             if (dataFetchDelegate == null) throw new ArgumentNullException("dataFetchDelegate");
 
             this._dataFetchDelegate = dataFetchDelegate;
-            HasMoreItems = true;
         }
 
         public bool HasMoreItems
         {
             get;
             private set;
-        }
+        } = true;
 
         public IAsyncOperation<LoadMoreItemsResult> LoadMoreItemsAsync(uint count)
         {

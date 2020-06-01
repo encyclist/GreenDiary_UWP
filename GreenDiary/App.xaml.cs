@@ -88,7 +88,7 @@ namespace GreenDiary
                     {
                         rootFrame.Navigate(typeof(MainPage), e.Arguments);
                     }
-                    else 
+                    else
                     {
                         rootFrame.Navigate(typeof(LoginPage), e.Arguments);
                     }
