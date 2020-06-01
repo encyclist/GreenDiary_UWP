@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Data;
 
 namespace GreenDiary.Pages
 {
+    // 加载更多的框架
     public class IncrementalLoadingCollection<T> : ObservableCollection<T>, ISupportIncrementalLoading
     {
         // 这里为了简单使用了Tuple<IList<T>, bool>作为返回值，第一项是新项目集合，第二项是否还有更多，也可以自定义实体类

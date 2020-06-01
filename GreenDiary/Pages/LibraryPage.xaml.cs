@@ -30,7 +30,6 @@ namespace GreenDiary.Pages
     {
         private MainViewModel ViewModel => App.MainViewModel;
 
-        //private readonly ObservableCollection<Diary> diarys = new ObservableCollection<Diary>();
         private IncrementalLoadingCollection<Diary> diarys;
 
         private readonly int limit = 30;
