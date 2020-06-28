@@ -9,6 +9,17 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock Text="设置"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Row="0" Grid.Column="0" x:Name="text_setting_1" Text="发现页面使用瀑布流布局" FontSize="18" Margin="10,10,0,0"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" x:Name="text_setting_2" Text="可能会比较占内存吧" Foreground="#666666" Margin="10,0,0,0"/>
+        <ToggleSwitch x:Name="switch_libarayUseWaterfall" Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" RelativePanel.AlignRightWith="text_setting_1" Margin="50,20,0,0" Toggled="ChangeLibraryLayout" />
     </Grid>
 </Page>

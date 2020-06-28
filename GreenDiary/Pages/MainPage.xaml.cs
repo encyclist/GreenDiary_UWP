@@ -26,6 +26,8 @@ namespace GreenDiary.Pages
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private readonly ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+
         private MainViewModel ViewModel => App.MainViewModel;
         public static ContentDialog CurrentDialog { get; set; } = null;
 
@@ -33,8 +35,8 @@ namespace GreenDiary.Pages
         {
             this.InitializeComponent();
             // 默认第一个被选中的效果
-            Navi.SelectedItem = Navi_Item_Library;
-            frame.Navigate(typeof(LibraryPage));
+            Navi.SelectedItem = Navi_Item_Diary;
+            frame.Navigate(typeof(DiaryPage));
 
             Mark();
         }
@@ -71,6 +73,15 @@ namespace GreenDiary.Pages
             }
             else if (Navi.SelectedItem == Navi_Item_Library)
             {
+                if (localSettings.Values.ContainsKey("LibraryUseWaterfall"))
+                {
+                    bool libraryUseWaterfall = (bool)localSettings.Values["LibraryUseWaterfall"];
+                    if (libraryUseWaterfall)
+                    {
+                        frame.Navigate(typeof(WaterfallLibraryPage));
+                        return;
+                    }
+                }
                 frame.Navigate(typeof(LibraryPage));
             }
             else if (Navi.SelectedItem == Navi_Item_Album)

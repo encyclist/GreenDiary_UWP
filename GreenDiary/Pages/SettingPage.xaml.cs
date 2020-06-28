@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -22,9 +23,23 @@ namespace GreenDiary.Pages
     /// </summary>
     public sealed partial class SettingPage : Page
     {
+        private readonly ApplicationDataContainer localSettings = ApplicationData.Current.LocalSettings;
+
         public SettingPage()
         {
             this.InitializeComponent();
+
+            if (localSettings.Values.ContainsKey("LibraryUseWaterfall"))
+            {
+                bool libraryUseWaterfall = (bool)localSettings.Values["LibraryUseWaterfall"];
+                switch_libarayUseWaterfall.IsOn = libraryUseWaterfall;
+            }
+        }
+
+        private void ChangeLibraryLayout(object sender, RoutedEventArgs e)
+        {
+            ToggleSwitch toggleSwitch = sender as ToggleSwitch;
+            localSettings.Values["LibraryUseWaterfall"] = toggleSwitch.IsOn;
         }
     }
 }
