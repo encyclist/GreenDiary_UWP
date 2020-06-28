@@ -79,10 +79,16 @@ namespace GreenDiary.Pages
                     if (libraryUseWaterfall)
                     {
                         frame.Navigate(typeof(WaterfallLibraryPage));
-                        return;
+                    }
+                    else
+                    {
+                        frame.Navigate(typeof(LibraryPage));
                     }
                 }
-                frame.Navigate(typeof(LibraryPage));
+                else
+                {
+                    frame.Navigate(typeof(LibraryPage));
+                }
             }
             else if (Navi.SelectedItem == Navi_Item_Album)
             {
