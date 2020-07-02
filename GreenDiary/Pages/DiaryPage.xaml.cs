@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -28,46 +29,48 @@ namespace GreenDiary.Pages
     {
         private MainViewModel ViewModel => App.MainViewModel;
 
-        private readonly int limit = 20;
+        private IncrementalLoadingCollection<Diary> diarys;
+
+        private readonly int limit = 30;
         private int page = 0;
-        private bool loading = false;
 
         public DiaryPage()
         {
             this.InitializeComponent();
-            GetData();
+
+            diarys = new IncrementalLoadingCollection<Diary>(count =>
+            {
+                var data = GetData();
+                return Task.Run(() => Tuple.Create(data.Result, data.Result.Count >= limit));
+            });
+            GridView_Diary.ItemsSource = diarys;
         }
 
-        private async void GetData()
+        private void DiaryPage_Loaded(object sender, RoutedEventArgs e)
         {
-            if (loading)
-            {
-                return;
-            }
-            loading = true;
-            page++;
+        }
 
-            var data = await ViewModel.GetDiaryList(page,limit);
+        private async Task<List<Diary>> GetData()
+        {
+            var data = await ViewModel.GetDiaryList(++page, limit);
             if (data.Successfully())
             {
-                loading = false;
-                var diarys = data.GetTArray<Diary>();
-                // TODO
+                return data.GetTArray<Diary>();
             }
             else
             {
                 new NotifyPopup(data.message).Show();
-                loading = false;
             }
+
+            return new List<Diary>(0);
         }
-        private void GetNewData()
+
+        private void PageSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (loading)
-            {
-                return;
-            }
-            page = 0;
-            GetData();
+            int colunm = (int)(e.NewSize.Width / (200 + 10 + 4));
+            var use = (colunm - 1) * 4 + colunm * (200 + 10);
+            var remaininge = e.NewSize.Width - use;
+            width.Width = (int)(200 + remaininge / colunm - 2);
         }
     }
 }

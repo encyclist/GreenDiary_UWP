@@ -32,7 +32,14 @@ namespace GreenDiary.Models
                 {
                     imgs2 = GetImages();
                 }
-                return imgs2[new Random().Next(imgs2.Count)];
+                if (imgs2.Count > 0)
+                {
+                    return imgs2[new Random().Next(imgs2.Count)];
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
         public List<string> GetImages()
